@@ -67,7 +67,7 @@ abstract class Vehicle extends Item implements Drivable, Refreshable{
     - isBroken : boolean
 
     + Vehicle(type: TypeCar, driver : Driver)
-    + Vehicle(type: TypeCar, driver : Driver, passengers : Passengers[])
+    + Vehicle(type: TypeCar, driver : Driver, passengers : Passenger[])
 
     + getFuelLevel() : int
     + isBroken() : boolean
@@ -109,7 +109,12 @@ class Driver extends Character {
     + turn() : void
 }
 
+class Passenger extends Character implements Refreshable{
+    + Passenger(name : String)
 
+    + refill(amount : int) : void
+    + consume(amount : int) : void
+}
 
 
 
