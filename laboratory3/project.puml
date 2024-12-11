@@ -59,16 +59,18 @@ class Board extends Item {
     + crack(character : Character) : void
 }
 
-abstract class Vehicle implements Drivable, Refreshable{
+abstract class Vehicle extends Item implements Drivable, Refreshable{
     - fuelLevel : int
     - driver : Driver
     - passengers : Passengers[]
     - type : TypeCar
+    - isBroken : boolean
 
     + Vehicle(type: TypeCar, driver : Driver)
     + Vehicle(type: TypeCar, driver : Driver, passengers : Passengers[])
 
     + getFuelLevel() : int
+    + isBroken() : boolean
     + setFuelLevel(amount : int) : void
     + crush(item : Item) : void
     + refill(amount : int) : void
@@ -84,6 +86,7 @@ abstract class Character implements Refreshable{
     - <<abstract>> canDrive : boolean
 
     + Character(name : String)
+
     + refill(amount : int) : void
     + consume(amount : int) : void
     + shout() : void
