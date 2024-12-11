@@ -1,46 +1,187 @@
 @startuml
 
 interface Drivable {
-    + void drive()
-    + void stop()
-    + void accelerate()
+    + drive() : void
+    + snort() : void
+    + stop() : void
+    + accelerate() : void
+}
+
+interface Refreshable {
+    + refill(amount : int) : void
+    + consume(amount : int) : void
 }
 
 interface Breakable {
-    + void breakObject()
-    + boolean isDestroyed()
+    + isBroken : boolean
+
+    + breakItem() : void
+    + isBroken() : boolean
 }
 
-interface Drivable {
-    + void refill()
-    + boolean consume(int amount)
+abstract class Item implements Breakable{
+    - title : String
+    - isBroken : boolean
+
+    + Item(item : String)
+
+    + breakItem() : void
+    + <<abstract>> isBroken() : boolean
 }
 
-abstract class Character {
-    + String name
-    + int energy
-    + <<abstract>> void performAction()
+class Booth extends Item implements Breakable {
+    - title : String
+    - isBroken : boolean
+
+    + Booth(title : String)
+
+    + breakItem() : void
+    + isBroken() : boolean
 }
 
-class Driver extends Character implements Drivable {
-    + boolean canDrive()
-    + void drive()
-    + void stop()
-    + void accelerate()
-    + void performAction()
+class Pavilion extends Item implements Breakable {
+    - title : String
+    - isBroken : boolean
+
+    + Pavilion(title : String)
+
+    + breakItem() : void
+    + isBroken() : boolean
 }
 
-abstract class Car {
-    + isPullLevers : boolean
-    + isPressPedals : boolean
-    + speed
+class Board extends Item {
+    - title : String
+    - isBroken : boolean
 
-    + snort() : boolean
-    + drive() : boolean
-    + crush(obj : String) : boolean
+    + Board(title : String)
 
+    + hook(character : Character) : void
+    + crack(character : Character) : void
 }
 
+abstract class Vehicle implements Drivable, Refreshable{
+    - fuelLevel : int
+    - driver : Driver
+    - passengers : Passengers[]
+    - type : TypeCar
+
+    + Vehicle(type: TypeCar, driver : Driver)
+    + Vehicle(type: TypeCar, driver : Driver, passengers : Passengers[])
+
+    + getFuelLevel() : int
+    + setFuelLevel(amount : int) : void
+    + crush(item : Item) : void
+    + refill(amount : int) : void
+    + consume(amount : int) : void
+    + <<abstract>> drive() : void
+    + <<abstract>> snort() : void
+    + <<abstract>> stop() : void
+    + <<abstract>> accelerate() : void
+}
+
+abstract class Character implements Refreshable{
+    - name : String
+    - <<abstract>> canDrive : boolean
+
+    + Character(name : String)
+    + refill(amount : int) : void
+    + consume(amount : int) : void
+    + shout() : void
+    + learnDrive() : void
+    + runOut() : void
+    + buildCar() : void
+    + run() : void
+    + see() : void
+    + ask() : void
+    + openFence() : void
+}
+
+class Driver extends Character {
+    + Driver(name : String)
+
+    + drive() : void
+    + pressPedals() : void
+    + pullLevers() : void
+    + grabSteeringWheel() : void
+    + turn() : void
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'interface Drivable {
+'    + drive() : void
+'    + stop() : void
+'    + accelerate() : void
+'}
+'
+'interface Breakable {
+'    + breakObject() : void
+'    + isDestroyed() : boolean
+'}
+'
+'interface Refreshable {
+'    + refill() : void
+'    + consume(int amount) : boolean
+'}
+'
+'abstract class Character {
+'    + name : String
+'    + energy : int
+'    + <<abstract>> performAction() :  void
+'}
+'
+'class Driver extends Character implements Drivable {
+'    + canDrive() : boolean
+'    + drive() : void
+'    + stop() : void
+'    + accelerate() : void
+'    + performAction() : void
+'}
+'
+'abstract class Vehicle {
+'    + isPullLevers : boolean
+'    + isPressPedals : boolean
+'
+'    + <<abstract>> snort() : void
+'    + <<abstract>> drive() : void
+'    + crush(obj : String) : boolean
+'}
+'class Car extends Vehicle{
+'    + driver : Driver
+'
+'}
 @enduml
 
 'Такие газированные автомобили были очень распространены среди коротышек.
