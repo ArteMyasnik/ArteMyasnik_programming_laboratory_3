@@ -109,7 +109,7 @@ class Driver extends Character {
     + turn() : void
 }
 
-class Passenger extends Character implements Refreshable{
+class Passenger extends Character {
     + Passenger(name : String)
 
     + refill(amount : int) : void
