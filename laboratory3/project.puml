@@ -26,40 +26,46 @@ abstract class Item implements Breakable{
     + Item(item : String)
 
     + breakItem() : void
+    + getTitle() : String
     + <<abstract>> isBroken() : boolean
 }
 
-class Booth extends Item implements Breakable {
+'class Booth extends Item implements Breakable {
+'    - title : String
+'    - isBroken : boolean
+'
+'    + Booth(title : String)
+'
+'    + breakItem() : void
+'    + getTitle() : String
+'    + isBroken() : boolean
+'}
+'
+'class Pavilion extends Item implements Breakable {
+'    - title : String
+'    - isBroken : boolean
+'
+'    + Pavilion(title : String)
+'
+'    + breakItem() : void
+'    + getTitle() : String
+'    + isBroken() : boolean
+'}
+
+class Shard extends Item {
     - title : String
     - isBroken : boolean
 
-    + Booth(title : String)
+    + Shard(title : String)
 
-    + breakItem() : void
-    + isBroken() : boolean
-}
-
-class Pavilion extends Item implements Breakable {
-    - title : String
-    - isBroken : boolean
-
-    + Pavilion(title : String)
-
-    + breakItem() : void
-    + isBroken() : boolean
-}
-
-class Board extends Item {
-    - title : String
-    - isBroken : boolean
-
-    + Board(title : String)
-
+    + getTitle() : String
     + hook(character : Character) : void
     + crack(character : Character) : void
 }
 
 abstract class Vehicle extends Item implements Drivable, Refreshable{
+    - title : String
+    - <<abstract>> title : String
     - fuelLevel : int
     - driver : Driver
     - passengers : Passengers[]
@@ -69,10 +75,12 @@ abstract class Vehicle extends Item implements Drivable, Refreshable{
     + Vehicle(type: TypeCar, driver : Driver)
     + Vehicle(type: TypeCar, driver : Driver, passengers : Passenger[])
 
+    + getTitle() : String
     + getFuelLevel() : int
     + isBroken() : boolean
     + setFuelLevel(amount : int) : void
-    + crush(item : Item) : void
+    + smash(item : Item) : void
+    + crush(entity : Entity) : void
     + refill(amount : int) : void
     + consume(amount : int) : void
     + <<abstract>> drive() : void
@@ -81,12 +89,20 @@ abstract class Vehicle extends Item implements Drivable, Refreshable{
     + <<abstract>> accelerate() : void
 }
 
-abstract class Character implements Refreshable{
+class Entity {
+    - name : String
+
+    + Entity(name : String)
+    + getName() : String
+}
+
+abstract class Character extends Entity implements Refreshable{
     - name : String
     - <<abstract>> canDrive : boolean
 
     + Character(name : String)
 
+    + getName() : String
     + refill(amount : int) : void
     + consume(amount : int) : void
     + shout() : void
@@ -100,8 +116,11 @@ abstract class Character implements Refreshable{
 }
 
 class Driver extends Character {
+    - name : String
+
     + Driver(name : String)
 
+    + getName() : String
     + drive() : void
     + pressPedals() : void
     + pullLevers() : void
@@ -110,8 +129,11 @@ class Driver extends Character {
 }
 
 class Passenger extends Character {
+    - name : String
+
     + Passenger(name : String)
 
+    + getName() : String
     + refill(amount : int) : void
     + consume(amount : int) : void
 }
