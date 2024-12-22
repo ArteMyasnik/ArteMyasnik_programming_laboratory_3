@@ -14,34 +14,16 @@ public abstract class Character extends Entity {
         super(name);
     }
 
-    @Override
-    public String toString() {
-        return "Character{" +
-                "name='" + this.getName() + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Character character = (Character) obj;
-        return Objects.equals(getName(), character.getName());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getName());
-    }
-
-
-    // Подстановка в функцию времени, рода, лица(если наст.)
     public void shout() {
         System.out.print("кричать во все горло ");
     }
 
     public void learnDrive() {
         System.out.print("научиться управлять автомобилем ");
+    }
+
+    public void drive() {
+        System.out.print("управлять автомобилем ");
     }
 
     public void runOut() {
@@ -65,6 +47,26 @@ public abstract class Character extends Entity {
     }
 
     public void getIntoCar() {
-        System.out.print("сесть в автомобиль");
+        System.out.print("сесть в автомобиль ");
+    }
+
+    @Override
+    public String toString() {
+        return "Character{" +
+                "name='" + this.getName() + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Character character = (Character) obj;
+        return Objects.equals(getName(), character.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName());
     }
 }
