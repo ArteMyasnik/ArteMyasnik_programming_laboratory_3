@@ -19,6 +19,7 @@ public abstract class Item implements Breakable {
     @Override
     public void breakItem() {
         this.isBroken = true;
+        System.out.print("Трах-та-ра-рах! ");
     }
 
     @Override

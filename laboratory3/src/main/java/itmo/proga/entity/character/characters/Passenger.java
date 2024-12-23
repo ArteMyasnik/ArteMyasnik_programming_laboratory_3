@@ -1,14 +1,34 @@
 package itmo.proga.entity.character.characters;
 
 import itmo.proga.entity.character.Character;
+import itmo.proga.enums.usable.FuelType;
 import itmo.proga.interfaces.annotation.Refreshable;
+import itmo.proga.item.items.vehicle.Vehicle;
 
 import java.util.Objects;
 
 @Refreshable
 public final class Passenger extends Character {
-    public Passenger(String name) {
+    private Vehicle vehicle;
+    public Passenger(String name, Vehicle vehicle) {
         super(name);
+        this.vehicle = vehicle;
+        vehicle.addPassenger(this);
+    }
+
+    public boolean isEdibleFuelType() {
+        return this.getFuelType().isEdible();
+    }
+    public FuelType getFuelType() {
+        return this.vehicle.getType();
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle.removePassenger(this);
+        vehicle.addPassenger(this);
     }
 
     @Override

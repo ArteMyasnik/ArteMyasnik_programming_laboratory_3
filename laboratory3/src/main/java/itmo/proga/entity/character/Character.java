@@ -1,11 +1,10 @@
 package itmo.proga.entity.character;
 
 import itmo.proga.entity.Entity;
-import itmo.proga.interfaces.annotation.Refreshable;
 
 import java.util.Objects;
 
-@Refreshable
+
 public abstract class Character extends Entity {
 
     public abstract boolean isCanDrive();
@@ -48,6 +47,10 @@ public abstract class Character extends Entity {
 
     public void getIntoCar() {
         System.out.print("сесть в автомобиль ");
+    }
+
+    public void catchUp() {
+        System.out.print("догнать ");
     }
 
     @Override

@@ -1,12 +1,24 @@
 package itmo.proga.entity.character.characters;
 
 import itmo.proga.entity.character.Character;
+import itmo.proga.item.items.vehicle.Vehicle;
 
 import java.util.Objects;
 
 public final class Driver extends Character {
-    public Driver(String name) {
+    private Vehicle vehicle;
+    public Driver(String name, Vehicle vehicle) {
         super(name);
+        this.vehicle = vehicle;
+        vehicle.setDriver(this);
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle.setDriver(null);
+        vehicle.setDriver(this);
+    }
+    public Vehicle getVehicle() {
+        return vehicle;
     }
 
     @Override

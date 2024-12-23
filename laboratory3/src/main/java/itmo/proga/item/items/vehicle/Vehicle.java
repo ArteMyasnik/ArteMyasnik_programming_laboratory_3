@@ -1,5 +1,6 @@
 package itmo.proga.item.items.vehicle;
 
+import itmo.proga.entity.Entity;
 import itmo.proga.entity.character.characters.Driver;
 import itmo.proga.entity.character.characters.Passenger;
 import itmo.proga.enums.usable.FuelType;
@@ -27,16 +28,24 @@ public class Vehicle extends Item implements Drivable {
     }
 
     public void drive() {
-        System.out.print("ехать ");
+        if (this.getDriver() != null) {
+            System.out.print("ехать ");
+        }
     }
     public void snort() {
-        System.out.print("фыркать ");
+        if (this.getDriver() != null) {
+            System.out.print("фыркать ");
+        }
     }
     public void stop() {
-        System.out.print("останавливаться ");
+        if (this.getDriver() != null) {
+            System.out.print("останавливаться ");
+        }
     }
     public void accelerate() {
-        System.out.print("ускоряться ");
+        if (this.getDriver() != null) {
+            System.out.print("ускоряться ");
+        }
     }
 
     public int getFuelLevel() {
@@ -68,7 +77,7 @@ public class Vehicle extends Item implements Drivable {
         if (passenger == null) {
             throw new IllegalArgumentException("Пассажир не может быть null");
         }
-        if (passengers.size() >= size.getNumberSeats()) {
+        if (hasAvailableSeats()) {
             throw new IllegalArgumentException("Больше нет мест для пассажиров");
         }
         passengers.add(passenger);
@@ -83,6 +92,13 @@ public class Vehicle extends Item implements Drivable {
     }
     public boolean hasAvailableSeats() {
         return getAvailableSeats() > 0;
+    }
+
+    public void crush(Entity entity) {
+        System.out.print(this.getDriver() + " почти раздавил " + entity.getName() + " ");
+    }
+    public void smash(Item item) {
+        System.out.print(this.getDriver() + " почти раздавил " + item.getTitle() + " ");
     }
 
     @Override
