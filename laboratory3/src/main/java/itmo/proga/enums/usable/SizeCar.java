@@ -15,7 +15,7 @@ public enum SizeCar {
     }
 
     public int getNumberSeats() {
-        return numberSeats;
+        return numberSeats - 1;
     }
 
     public String getSizeName() {

@@ -1,22 +1,32 @@
 package itmo.proga.entity.character.characters;
 
 import itmo.proga.entity.character.Character;
+import itmo.proga.exceptions.CharacterIsNotInVehicle;
 import itmo.proga.item.items.vehicle.Vehicle;
 
 import java.util.Objects;
 
 public final class Driver extends Character {
     private Vehicle vehicle;
+
     public Driver(String name, Vehicle vehicle) {
         super(name);
         this.vehicle = vehicle;
+        if (this.vehicle == null) {
+            throw new CharacterIsNotInVehicle("Character: " + this.getName() + " can not be in null Vehicle");
+        }
         vehicle.setDriver(this);
     }
 
     public void setVehicle(Vehicle vehicle) {
+        if (this.vehicle == null) {
+            vehicle.setDriver(this);
+            throw new CharacterIsNotInVehicle("Character: " + this.getName() + " is not the vehicle");
+        }
         this.vehicle.setDriver(null);
         vehicle.setDriver(this);
     }
+
     public Vehicle getVehicle() {
         return vehicle;
     }

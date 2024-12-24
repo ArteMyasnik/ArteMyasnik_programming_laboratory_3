@@ -27,10 +27,10 @@ public final class Shard extends Item {
     }
 
     public void hook(Entity entity) {
-        System.out.print( this.getTitle() + " зацепить " + entity.getName() + " ");
+        System.out.print(this.getTitle() + " зацепить " + entity.getName() + " ");
     }
 
     public void crack(Entity entity) {
-        System.out.print( this.getTitle() + " треснуть " + entity.getName() + " ");
+        System.out.print(this.getTitle() + " треснуть " + entity.getName() + " ");
     }
 }

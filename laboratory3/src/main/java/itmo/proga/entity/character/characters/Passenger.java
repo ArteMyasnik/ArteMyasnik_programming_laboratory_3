@@ -2,6 +2,8 @@ package itmo.proga.entity.character.characters;
 
 import itmo.proga.entity.character.Character;
 import itmo.proga.enums.usable.FuelType;
+import itmo.proga.exceptions.CharacterIsNotInVehicle;
+import itmo.proga.exceptions.NoMoreSeatsAvailable;
 import itmo.proga.interfaces.annotation.Refreshable;
 import itmo.proga.item.items.vehicle.Vehicle;
 
@@ -10,23 +12,39 @@ import java.util.Objects;
 @Refreshable
 public final class Passenger extends Character {
     private Vehicle vehicle;
-    public Passenger(String name, Vehicle vehicle) {
+
+    public Passenger(String name, Vehicle vehicle) throws NoMoreSeatsAvailable {
         super(name);
         this.vehicle = vehicle;
+        if (this.vehicle == null) {
+            throw new CharacterIsNotInVehicle("Character: " + this.getName() + " can not be in null Vehicle");
+        }
         vehicle.addPassenger(this);
     }
 
     public boolean isEdibleFuelType() {
+        if (this.vehicle == null) {
+            throw new CharacterIsNotInVehicle("Character: " + this.getName() + " is not the vehicle");
+        }
         return this.getFuelType().isEdible();
     }
+
     public FuelType getFuelType() {
+        if (this.vehicle == null) {
+            throw new CharacterIsNotInVehicle("Character: " + this.getName() + " is not the vehicle");
+        }
         return this.vehicle.getType();
     }
 
     public Vehicle getVehicle() {
         return vehicle;
     }
-    public void setVehicle(Vehicle vehicle) {
+
+    public void setVehicle(Vehicle vehicle) throws NoMoreSeatsAvailable {
+        if (this.vehicle == null) {
+            vehicle.addPassenger(this);
+            throw new CharacterIsNotInVehicle("Character: " + this.getName() + " is not the vehicle");
+        }
         this.vehicle.removePassenger(this);
         vehicle.addPassenger(this);
     }
