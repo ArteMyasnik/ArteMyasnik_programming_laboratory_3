@@ -19,8 +19,20 @@ public enum Words {
     ONCE("однажды "), BIG_ONCE("Однажды "),
     SUDDENLY("вдруг "), BIG_SUDDENLY("Вдруг "),
     FIRSTLY("сначала "), BIG_FIRSTLY("Сначала "),
-    ;
+    NOTHING("ничего "), BIG_NOTHING("Ничего "),
+    THEN("потом "), BIG_THEN("Потом "),
+    FROM("из "), BIG_FROM("Из "),
+    INSTEADOF("вместо "), BIG_INSTEADOF("Вместо "),
+    MORE("ещё "), BIG_MORE("Ещё ");
+
+    private final String word;
 
     Words(String word) {
+        this.word = word;
+    }
+
+    @Override
+    public String toString() {
+        return word;
     }
 }

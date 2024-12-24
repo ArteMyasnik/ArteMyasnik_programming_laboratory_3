@@ -36,6 +36,7 @@ public final class Driver extends Character {
         return "Driver{" +
                 "name='" + this.getName() + '\'' +
                 ", canDrive=" + isCanDrive() +
+                ", vehicle=" + (vehicle != null ? vehicle.getTitle() : "vehicle is null") +
                 '}';
     }
 
@@ -44,12 +45,13 @@ public final class Driver extends Character {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Driver driver = (Driver) obj;
-        return Objects.equals(getName(), driver.getName());
+        return Objects.equals(getName(), driver.getName()) &&
+                Objects.equals(vehicle, driver.vehicle);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), isCanDrive());
+        return Objects.hash(getName(), vehicle);
     }
 
     @Override

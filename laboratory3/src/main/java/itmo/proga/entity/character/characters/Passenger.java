@@ -54,6 +54,7 @@ public final class Passenger extends Character {
         return "Passenger{" +
                 "name='" + this.getName() + '\'' +
                 ", canDrive=" + isCanDrive() +
+                ", vehicle=" + (vehicle != null ? vehicle.getTitle() : "нет транспортного средства") +
                 '}';
     }
 
@@ -62,12 +63,13 @@ public final class Passenger extends Character {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Passenger passenger = (Passenger) obj;
-        return Objects.equals(getName(), passenger.getName());
+        return Objects.equals(getName(), passenger.getName()) &&
+                Objects.equals(vehicle, passenger.vehicle);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), isCanDrive());
+        return Objects.hash(getName(), vehicle);
     }
 
     @Override

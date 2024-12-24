@@ -13,6 +13,14 @@ public abstract class Character extends Entity {
         super(name);
     }
 
+    public void wantTo() {
+        System.out.print("хотеть ");
+    }
+
+    public void can() {
+        System.out.print("мог ");
+    }
+
     public void shout() {
         System.out.print("кричать во все горло ");
     }
