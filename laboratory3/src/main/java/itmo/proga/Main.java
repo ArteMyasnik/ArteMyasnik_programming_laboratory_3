@@ -10,9 +10,6 @@ import itmo.proga.item.items.vehicle.Vehicle;
 
 // вариант 345346.8
 public class Main {
-    {
-        System.out.println("Hello world!");
-    }
     public static void main(String[] args) throws NoMoreSeatsAvailable {
         // TODO Make Main
         Vehicle vehicle1 = new Vehicle("Машина", 50);
@@ -88,9 +85,10 @@ public class Main {
         System.out.println("Одна " + board1.getTitle() + board1.crack(neznaikaDriver) + PunctuationMarks.COMMA + board2.hook(neznaikaDriver) + PunctuationMarks.DOT);
         System.out.println(neznaikaDriver.grabSteeringWheel() + Words.AND + neznaikaDriver.turn() + PunctuationMarks.DOT);
         System.out.println(vehicle1.getTitle() + vehicle1.accelerate() + "по двору" + PunctuationMarks.COMMA + Words.A + neznaikaDriver.getName() + neznaikaDriver.shout() + PunctuationMarks.COLON + "Коротышки " + syropchik.openFence() + PunctuationMarks.COMMA + neznaikaDriver.drive() + "со двора " + Words.AND + vehicle1.accelerate() + "по улице" + PunctuationMarks.DOT);
-        System.out.println("Услышав шум" + PunctuationMarks.COMMA + "со всех дворов " + shorty.runOut() + "коротышки" + PunctuationMarks.DOT);
+        System.out.println("Услышав шум" + PunctuationMarks.COMMA + "со всех дворов " + shorty.runOut() + shorty.getName() + PunctuationMarks.DOT);
         System.out.println(shorty.getCharacter("Знайка").getName() + PunctuationMarks.COMMA + shorty.getCharacter("Авоська").getName() + PunctuationMarks.COMMA + shorty.getCharacter("Винтик").getName() + PunctuationMarks.COMMA + shorty.getCharacter("доктор Пилюлькин").getName() + Words.AND + "другие " + shorty.getName() + shorty.runOut() + "за ним" + PunctuationMarks.DOT);
         System.out.println(Words.BIG_BUT + "где там" + PunctuationMarks.EXCLAMATION_MARK);
-        System.out.println("Они не" + shorty.can() + "его " + shorty.catchUp() + PunctuationMarks.DOT);
+        System.out.println("Они не " + shorty.can() + "его " + shorty.catchUp() + PunctuationMarks.DOT);
+//        System.out.println(syropchik.consume(10));
     }
 }
