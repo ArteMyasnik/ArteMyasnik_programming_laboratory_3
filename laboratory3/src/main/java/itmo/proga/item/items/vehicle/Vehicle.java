@@ -5,6 +5,8 @@ import itmo.proga.entity.character.characters.Driver;
 import itmo.proga.entity.character.characters.Passenger;
 import itmo.proga.enums.usable.FuelType;
 import itmo.proga.enums.usable.SizeCar;
+import itmo.proga.enums.usable.TypeCar;
+import itmo.proga.enums.usable.supportive.CarFuelTypeMapper;
 import itmo.proga.exceptions.CharacterIsNotInVehicle;
 import itmo.proga.exceptions.NoMoreSeatsAvailable;
 import itmo.proga.interfaces.Drivable;
@@ -16,43 +18,52 @@ import java.util.*;
 @Refreshable
 public class Vehicle extends Item implements Drivable {
     private int fuelLevel;
-    private final FuelType type;
+    private final FuelType fuelType;
+    private final TypeCar typeCar;
     private final SizeCar size;
     private Driver driver;
     private final List<Passenger> passengers;
 
-    public Vehicle(String title, int fuelLevel, FuelType type, SizeCar size) {
+    public Vehicle(String title, int fuelLevel) {
         super(title);
         this.fuelLevel = fuelLevel;
-        this.type = type;
-        this.size = size;
-        this.passengers = new ArrayList<>(size.getNumberSeats());
+        this.fuelType = FuelType.getRandomFuelType();
+        this.typeCar = CarFuelTypeMapper.getTypeCar(this.fuelType);
+        this.size = SizeCar.getRandomSizeCar();
+        this.passengers = new ArrayList<>(size.getNumberSeats() - 1);
     }
 
-    public void drive() {
+    public String drive() {
         if (this.getDriver() != null && this.getFuelLevel() > 0) {
             this.setFuelLevel(this.getFuelLevel() - 1);
-            System.out.print("ехать ");
+            return "ехать ";
         }
+        this.stop();
+        return "";
     }
 
-    public void snort() {
+    public String snort() {
         if (this.getDriver() != null) {
-            System.out.print("фыркать ");
+            return "фыркать ";
         }
+
+        return "";
     }
 
-    public void stop() {
+    public String stop() {
         if (this.getDriver() != null) {
-            System.out.print("останавливаться ");
+            return "останавливаться ";
         }
+        return "";
     }
 
-    public void accelerate() {
+    public String accelerate() {
         if (this.getDriver() != null && this.getFuelLevel() > 0) {
             this.setFuelLevel(this.getFuelLevel() - 3);
-            System.out.print("ускоряться ");
+            return "ускоряться ";
         }
+        this.stop();
+        return "";
     }
 
     public int getFuelLevel() {
@@ -67,8 +78,12 @@ public class Vehicle extends Item implements Drivable {
         return size;
     }
 
-    public FuelType getType() {
-        return type;
+    public FuelType getFuelType() {
+        return fuelType;
+    }
+
+    public TypeCar getTypeCar() {
+        return typeCar;
     }
 
     public Driver getDriver() {
@@ -109,14 +124,19 @@ public class Vehicle extends Item implements Drivable {
     }
 
 
-    public void crush(Entity entity) {
-        System.out.print(this.getDriver() + " почти раздавил " + entity.getName() + " ");
+    public String crush(Entity entity) {
+        return this.getDriver() + " почти раздавил " + entity.getName() + " ";
     }
 
-    public void smash(Item item) {
-        item.breakItem();
-        System.out.print(this.getDriver() + " сломал " + item.getTitle() + " ");
+    public String crush(Record record) {
+        return this.getDriver() + " почти раздавил " + record.toString() + " ";
     }
+
+    public String smash(Item item) {
+        item.breakItem();
+        return this.getDriver() + " сломал " + item.getTitle() + " ";
+    }
+
 
     @Override
     public String toString() {
@@ -134,7 +154,7 @@ public class Vehicle extends Item implements Drivable {
         return isBroken() == vehicle.isBroken() &&
                 fuelLevel == vehicle.fuelLevel &&
                 Objects.equals(getTitle(), vehicle.getTitle()) &&
-                type == vehicle.type &&
+                fuelType == vehicle.fuelType &&
                 size == vehicle.size &&
                 Objects.equals(driver, vehicle.driver) &&
                 Objects.equals(passengers, vehicle.passengers);
@@ -142,6 +162,6 @@ public class Vehicle extends Item implements Drivable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getTitle(), isBroken(), getFuelLevel(), getFuelLevel(), getSize(), getType(), getDriver(), getPassenger(), getAvailableSeats());
+        return Objects.hash(getTitle(), isBroken(), getFuelLevel(), getFuelLevel(), getSize(), getFuelType(), getDriver(), getPassenger(), getAvailableSeats());
     }
 }

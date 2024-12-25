@@ -1,5 +1,7 @@
 package itmo.proga.enums.usable;
 
+import itmo.proga.utils.RandomNumberGenerator;
+
 public enum SizeCar {
     SMALL("Маленький", 2),
     MEDIUM("Средний", 5),
@@ -15,11 +17,17 @@ public enum SizeCar {
     }
 
     public int getNumberSeats() {
-        return numberSeats - 1;
+        return numberSeats;
     }
 
     public String getSizeName() {
         return sizeName;
+    }
+
+    public static SizeCar getRandomSizeCar() {
+        SizeCar[] sizes = SizeCar.values();
+        int randomIndex = RandomNumberGenerator.generateNumber() % sizes.length;
+        return sizes[randomIndex];
     }
 
     @Override

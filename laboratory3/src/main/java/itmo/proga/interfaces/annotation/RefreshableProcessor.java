@@ -37,49 +37,46 @@ public class RefreshableProcessor extends AbstractProcessor {
         String className = classElement.getSimpleName().toString();
         String packageName = processingEnv.getElementUtils().getPackageOf(classElement).toString();
 
-        // Создаем метод refill
         MethodSpec refillMethod = MethodSpec.methodBuilder("refill")
                 .addModifiers(Modifier.PUBLIC)
-                .returns(void.class)
+                .returns(String.class)
                 .addParameter(int.class, "amount")
-                .beginControlFlow("if (this instanceof $T)", Vehicle.class) // Проверка на Vehicle
+                .beginControlFlow("if (this instanceof $T)", Vehicle.class)
                 .addStatement("this.setFuelLevel(this.getFuelLevel() + amount)")
-                .addStatement("System.out.print(\"пополнить \" + amount + \" \" + getType().getFuelType() + \" \")")
+                .addStatement("return \"пополнить \" + amount + \" \" + getType().getFuelType() + \" \"")
                 .endControlFlow()
-                .beginControlFlow("if (this instanceof $T)", Passenger.class) // Проверка на Passenger
-                .addStatement("System.out.print(\"Персонаж не может пополнить топливо \")")
+                .beginControlFlow("if (this instanceof $T)", Passenger.class)
+                .addStatement("return \"Персонаж не может пополнить топливо \"")
                 .endControlFlow()
+                .addStatement("return \"\"")
                 .build();
 
-        // Создаем метод consume
         MethodSpec consumeMethod = MethodSpec.methodBuilder("consume")
                 .addModifiers(Modifier.PUBLIC)
-                .returns(void.class)
+                .returns(String.class)
                 .addParameter(int.class, "amount")
                 .addStatement("this.setFuelLevel(this.getFuelLevel() - amount)")
-                .beginControlFlow("if (this instanceof $T)", Vehicle.class) // Проверка на Vehicle
-                .addStatement("System.out.print(\"использовать \" + amount + \" \" + getType().getFuelType() + \" \")")
+                .beginControlFlow("if (this instanceof $T)", Vehicle.class)
+                .addStatement("return \"использовать \" + amount + \" \" + getType().getFuelType() + \" \"")
                 .endControlFlow()
-                .beginControlFlow("if (this instanceof $T)", Passenger.class) // Проверка на Passenger
+                .beginControlFlow("if (this instanceof $T)", Passenger.class)
                 .beginControlFlow("if (this.isEdibleFuelType())")
-                .addStatement("System.out.print(this.getName() + \"потребил \" + amount + \" \" + this.getFuelType() + \" \")")
+                .addStatement("return this.getName() + \" потребил \" + amount + \" \" + this.getFuelType() + \" \"")
                 .nextControlFlow("else")
-                .addStatement("System.out.print(this.getName() + \" не может потребить \" + this.getFuelType() + \" \")")
+                .addStatement("return this.getName() + \" не может потребить \" + this.getFuelType() + \" \"")
                 .endControlFlow()
                 .endControlFlow()
+                .addStatement("return \"\"")
                 .build();
 
-        // Создаем класс с добавленными методами
         TypeSpec updatedClass = TypeSpec.classBuilder(className)
                 .addModifiers(Modifier.PUBLIC)
                 .addMethod(refillMethod)
                 .addMethod(consumeMethod)
                 .build();
 
-        // Генерируем файл
         JavaFile javaFile = JavaFile.builder(packageName, updatedClass).build();
 
-        // Записываем сгенерированный код в файл
         try {
             javaFile.writeTo(processingEnv.getFiler());
         } catch (IOException e) {

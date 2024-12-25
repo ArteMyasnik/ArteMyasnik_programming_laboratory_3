@@ -1,11 +1,11 @@
 package itmo.proga.interfaces;
 
 public interface Drivable {
-    public void drive();
+    public String drive();
 
-    public void snort();
+    public String snort();
 
-    public void stop();
+    public String stop();
 
-    public void accelerate();
+    public String accelerate();
 }

@@ -11,15 +11,10 @@ import java.util.Objects;
 
 @Refreshable
 public final class Passenger extends Character {
-    private Vehicle vehicle;
+    private Vehicle vehicle = null;
 
-    public Passenger(String name, Vehicle vehicle) throws NoMoreSeatsAvailable {
+    public Passenger(String name) {
         super(name);
-        this.vehicle = vehicle;
-        if (this.vehicle == null) {
-            throw new CharacterIsNotInVehicle("Character: " + this.getName() + " can not be in null Vehicle");
-        }
-        vehicle.addPassenger(this);
     }
 
     public boolean isEdibleFuelType() {
@@ -33,7 +28,7 @@ public final class Passenger extends Character {
         if (this.vehicle == null) {
             throw new CharacterIsNotInVehicle("Character: " + this.getName() + " is not the vehicle");
         }
-        return this.vehicle.getType();
+        return this.vehicle.getFuelType();
     }
 
     public Vehicle getVehicle() {

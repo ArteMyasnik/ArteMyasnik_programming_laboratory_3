@@ -26,11 +26,11 @@ public final class Shard extends Item {
         return isBroken() == shard.isBroken() && Objects.equals(getTitle(), shard.getTitle());
     }
 
-    public void hook(Entity entity) {
-        System.out.print(this.getTitle() + " зацепить " + entity.getName() + " ");
+    public String hook(Entity entity) {
+        return this.getTitle() + " зацепить " + entity.getName() + " ";
     }
 
-    public void crack(Entity entity) {
-        System.out.print(this.getTitle() + " треснуть " + entity.getName() + " ");
+    public String crack(Entity entity) {
+        return this.getTitle() + " треснуть " + entity.getName() + " ";
     }
 }

@@ -4,7 +4,7 @@ import itmo.proga.interfaces.Breakable;
 
 import java.util.Objects;
 
-public abstract class Item implements Breakable {
+public class Item implements Breakable {
     private final String title;
     private boolean isBroken;
 
@@ -17,9 +17,9 @@ public abstract class Item implements Breakable {
     }
 
     @Override
-    public void breakItem() {
+    public String breakItem() {
         this.isBroken = true;
-        System.out.print("Трах-та-ра-рах! ");
+        return "Трах-та-ра-рах! ";
     }
 
     @Override

@@ -1,6 +1,9 @@
 package itmo.proga.entity.character;
 
 import itmo.proga.entity.Entity;
+import itmo.proga.entity.character.characters.*;
+import itmo.proga.enums.unusable.Words;
+import itmo.proga.item.items.vehicle.Vehicle;
 
 import java.util.Objects;
 
@@ -13,52 +16,80 @@ public abstract class Character extends Entity {
         super(name);
     }
 
-    public void wantTo() {
-        System.out.print("хотеть ");
+    public Driver becomeDriver() {
+        return (Driver) this;
     }
 
-    public void can() {
-        System.out.print("мог ");
+    public Passenger becomePassenger() {
+        return (Passenger) this;
     }
 
-    public void shout() {
-        System.out.print("кричать во все горло ");
+    public String wantTo() {
+        return "хотеть ";
     }
 
-    public void learnDrive() {
-        System.out.print("научиться управлять автомобилем ");
+    public String can() {
+        return "мог ";
     }
 
-    public void drive() {
-        System.out.print("управлять автомобилем ");
+    public String love() {
+        return "любить ";
     }
 
-    public void runOut() {
-        System.out.print("выбежать ");
+    public String shout() {
+        return "кричать во все горло ";
     }
 
-    public void see() {
-        System.out.print("увидеть ");
+    public String ride() {
+        return "кататься ";
     }
 
-    public void ask() {
-        System.out.print("стал просить ");
+    public String build() {
+        return "соорудить ";
     }
 
-    public void openFence() {
-        System.out.print("открыть ворота ");
+    public String learnDrive() {
+        return "научиться управлять" + Words.THIS + "автомобилем ";
     }
 
-    public void workingOut() {
-        System.out.print("получаться ");
+    public String drive() {
+        return "управлять автомобилем ";
     }
 
-    public void getIntoCar() {
-        System.out.print("сесть в автомобиль ");
+    public String drink() {
+        return "пить ";
     }
 
-    public void catchUp() {
-        System.out.print("догнать ");
+    public String runOut() {
+        return "выбежать ";
+    }
+
+    public String see() {
+        return "увидеть ";
+    }
+
+    public String ask(Character character) {
+        return "стал просить " + character.getName();
+    }
+
+    public String openFence() {
+        return "открыть ворота ";
+    }
+
+    public String frightened() {
+        return "испугаться ";
+    }
+
+    public String workingOut() {
+        return "получаться ";
+    }
+
+    public String getIntoCar(Vehicle vehicle) {
+        return "сесть " + Words.IN + vehicle.getTitle();
+    }
+
+    public String catchUp() {
+        return "догнать ";
     }
 
     @Override

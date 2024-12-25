@@ -9,13 +9,8 @@ import java.util.Objects;
 public final class Driver extends Character {
     private Vehicle vehicle;
 
-    public Driver(String name, Vehicle vehicle) {
+    public Driver(String name) {
         super(name);
-        this.vehicle = vehicle;
-        if (this.vehicle == null) {
-            throw new CharacterIsNotInVehicle("Character: " + this.getName() + " can not be in null Vehicle");
-        }
-        vehicle.setDriver(this);
     }
 
     public void setVehicle(Vehicle vehicle) {
@@ -59,27 +54,27 @@ public final class Driver extends Character {
         return true;
     }
 
-    public void decline() {
-        System.out.print("отказать ");
+    public String decline() {
+        return "отказать ";
     }
 
-    public void drive() {
-        System.out.print("катать ");
+    public String drive() {
+        return "катать ";
     }
 
-    public void pressPedals() {
-        System.out.print("нажимать педали ");
+    public String pressPedals() {
+        return "нажимать педали ";
     }
 
-    public void pullLevers() {
-        System.out.print("дергать за рычаги ");
+    public String pullLevers() {
+        return "дергать за рычаги ";
     }
 
-    public void grabSteeringWheel() {
-        System.out.print("ухватиться за руль ");
+    public String grabSteeringWheel() {
+        return "ухватиться за руль ";
     }
 
-    public void turn() {
-        System.out.print("поворачивать ");
+    public String turn() {
+        return "поворачивать ";
     }
 }
